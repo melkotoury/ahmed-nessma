@@ -1,105 +1,16 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 
-import { Dialog, DialogPanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-
-const navigation = [
-  { name: 'Share Your Memories', href: 'share-your-memories' },
-]
+import { Footer } from '@/components/Footer'
+import { Hero } from '@/components/Hero'
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
   return (
     <div className='bg-white flex flex-col '>
-      <header className='absolute inset-x-0 top-0 z-50'>
-        <nav
-          className='flex items-center justify-between p-6 lg:px-8'
-          aria-label='Global'
-        >
-          <div className='flex lg:flex-1'>
-            <Link href='#' className='-m-1.5 p-1.5'>
-              <span className='sr-only'>Ahmed & Nessma Wedding</span>
-              <Image
-                width={600}
-                height={400}
-                className='h-8 w-auto'
-                src='logo.svg'
-                alt='Ahmed & Nessma Wedding Logo'
-              />
-            </Link>
-          </div>
-          <div className='flex lg:hidden'>
-            <button
-              type='button'
-              className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <span className='sr-only'>Open main menu</span>
-              <Bars3Icon className='h-6 w-6' aria-hidden='true' />
-            </button>
-          </div>
-          <div className='hidden lg:flex lg:gap-x-12'>
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className='text-sm font-semibold leading-6 text-gray-900'
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        </nav>
-        <Dialog
-          className='lg:hidden'
-          open={mobileMenuOpen}
-          onClose={setMobileMenuOpen}
-        >
-          <div className='fixed inset-0 z-50' />
-          <DialogPanel className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
-            <div className='flex items-center justify-between'>
-              <Link href='#' className='-m-1.5 p-1.5'>
-                <span className='sr-only'>Ahmed & Nessma Wedding</span>
-                <Image
-                  width={600}
-                  height={400}
-                  className='h-8 w-auto'
-                  src='logo.svg'
-                  alt=''
-                />
-              </Link>
-              <button
-                type='button'
-                className='-m-2.5 rounded-md p-2.5 text-gray-700'
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className='sr-only'>Close menu</span>
-                <XMarkIcon className='h-6 w-6' aria-hidden='true' />
-              </button>
-            </div>
-            <div className='mt-6 flow-root'>
-              <div className='-my-6 divide-y divide-gray-500/10'>
-                <div className='space-y-2 py-6'>
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </DialogPanel>
-        </Dialog>
-      </header>
+      <Hero />
 
       <div className='relative isolate px-6 pt-14 lg:px-8'>
         <div
@@ -160,45 +71,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <footer className='rounded-lg shadow dark:bg-gray-900 m-4 bottom-0'>
-        <div className='w-full max-w-screen-xl mx-auto p-4 md:py-8'>
-          <div className='sm:flex sm:items-center sm:justify-between'>
-            <Link
-              href='#'
-              className='flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse'
-            >
-              <Image
-                width={600}
-                height={400}
-                src='logo.svg'
-                className='h-8'
-                alt='Ahmed & Nessma Wedding Logo'
-              />
-              <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
-                Ahmed & Nessma Wedding
-              </span>
-            </Link>
-            <ul className='flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400'>
-              <li>
-                <Link
-                  href='share-your-memories'
-                  className='hover:underline me-4 md:me-6'
-                >
-                  Share Your Memories
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <hr className='my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8' />
-          <span className='block text-sm text-gray-500 sm:text-center dark:text-gray-400'>
-            © 2024{' '}
-            <Link href='#' className='hover:underline'>
-              Ahmed & Nessma Wedding™
-            </Link>
-            . All Rights Reserved.
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
