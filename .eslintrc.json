@@ -1,5 +1,6 @@
 {
   "extends": [
+    "next",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
@@ -9,7 +10,9 @@
   "plugins": ["@typescript-eslint", "react", "react-hooks"],
   "rules": {
     "react/prop-types": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

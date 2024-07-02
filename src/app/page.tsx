@@ -125,6 +125,7 @@ export default function Home() {
               Ahmed & Nessma
             </h1>
             <p className='mt-6 text-lg leading-8 text-gray-600'>
+              {' '}
               We're so grateful to be surrounded by so much love. Thank you for
               sharing a memory of this special day with us
             </p>
