@@ -21,8 +21,9 @@ export const Hero = () => {
           <Link href='#' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Ahmed & Nessma Wedding</span>
             <Image
-              width={150}
-              height={100}
+              width={75}
+              height={50}
+              className='h-8 w-auto'
               src='logo.svg'
               alt='Ahmed & Nessma Wedding Logo'
             />
@@ -61,8 +62,8 @@ export const Hero = () => {
             <Link href='#' className='-m-1.5 p-1.5'>
               <span className='sr-only'>Ahmed & Nessma Wedding</span>
               <Image
-                width={600}
-                height={400}
+                width={75}
+                height={50}
                 className='h-8 w-auto'
                 src='logo.svg'
                 alt=''

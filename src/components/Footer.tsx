@@ -12,8 +12,9 @@ export const Footer = () => {
             className='flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse'
           >
             <Image
-              width={150}
-              height={100}
+              width={75}
+              height={50}
+              className='h-8 w-auto'
               src='logo.svg'
               alt='Ahmed & Nessma Wedding Logo'
             />
