@@ -5,13 +5,14 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import React, { useState } from 'react'
 
 const navigation = [
+  { name: 'Home', href: '/' },
   { name: 'Share Your Memories', href: 'share-your-memories' },
 ]
 export const Hero = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className='absolute inset-x-0 top-0 z-50'>
+    <header className='absolute inset-x-0 top-0 z-50 sticky'>
       <nav
         className='flex items-center justify-between p-6 lg:px-8'
         aria-label='Global'
@@ -20,9 +21,8 @@ export const Hero = () => {
           <Link href='#' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Ahmed & Nessma Wedding</span>
             <Image
-              width={600}
-              height={400}
-              className='h-8 w-auto'
+              width={150}
+              height={100}
               src='logo.svg'
               alt='Ahmed & Nessma Wedding Logo'
             />
