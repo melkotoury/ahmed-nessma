@@ -3,11 +3,11 @@
 import React from 'react'
 import Image from 'next/image'
 
-import Link from 'next/link'
 import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
+import { MemoryForm } from '@/components/MemoryForm'
 
-export default function Home() {
+export default function ShareYourMemories() {
   return (
     <div className='bg-white flex flex-col '>
       <Hero />
@@ -40,19 +40,11 @@ export default function Home() {
               We're so grateful to be surrounded by so much love. Thank you for
               sharing a memory of this special day with us
             </p>
-            <div className='mt-10 flex items-center justify-center gap-x-6'>
-              <Link
-                href='/share-your-memories'
-                className='rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-              >
-                Share your memories
-              </Link>
-            </div>
           </div>
           <div className='mt-10 flex items-center justify-center gap-x-6'>
             <Image
               src='/couple.jpg'
-              alt={'ahmed & nessma photo'}
+              alt={'ahmed & Nessma photo'}
               width={800}
               height={1280}
             />
@@ -71,6 +63,7 @@ export default function Home() {
           />
         </div>
       </div>
+      <MemoryForm />
       <Footer />
     </div>
   )
