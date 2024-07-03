@@ -18,7 +18,7 @@ export const Footer = () => {
               src='logo.svg'
               alt='Ahmed & Nessma Wedding Logo'
             />
-            <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
+            <span className='self-center text-xl md:text-2xl font-semibold whitespace-nowrap dark:text-white'>
               Ahmed & Nessma Wedding
             </span>
           </Link>
