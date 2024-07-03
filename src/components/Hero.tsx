@@ -24,7 +24,7 @@ export const Hero = () => {
               width={75}
               height={50}
               className='h-8 w-auto'
-              src='logo.svg'
+              src='/logo.svg'
               alt='Ahmed & Nessma Wedding Logo'
             />
           </Link>
@@ -65,7 +65,7 @@ export const Hero = () => {
                 width={75}
                 height={50}
                 className='h-8 w-auto'
-                src='logo.svg'
+                src='/logo.svg'
                 alt=''
               />
             </Link>

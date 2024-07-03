@@ -15,7 +15,7 @@ export const Footer = () => {
               width={75}
               height={50}
               className='h-8 w-auto'
-              src='logo.svg'
+              src='/logo.svg'
               alt='Ahmed & Nessma Wedding Logo'
             />
             <span className='self-center text-xl md:text-2xl font-semibold whitespace-nowrap dark:text-white'>

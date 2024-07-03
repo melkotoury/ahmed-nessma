@@ -3,15 +3,11 @@
 import React from 'react'
 import Image from 'next/image'
 
-import Link from 'next/link'
 import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
+import { LoginForm } from '@/components/LoginForm'
 
-import { useQRCode } from 'next-qrcode'
-
-function Home() {
-  const { Canvas } = useQRCode()
-
+export default function Login() {
   return (
     <div className='bg-white flex flex-col '>
       <Hero />
@@ -44,19 +40,11 @@ function Home() {
               We're so grateful to be surrounded by so much love. Thank you for
               sharing a memory of this special day with us
             </p>
-            <div className='mt-10 flex items-center justify-center gap-x-6'>
-              <Link
-                href='/share-your-memories'
-                className='rounded-md bg-purple-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-              >
-                Share your memories
-              </Link>
-            </div>
           </div>
           <div className='mt-10 flex items-center justify-center gap-x-6'>
             <Image
               src='/couple.jpg'
-              alt={'ahmed & nessma photo'}
+              alt={'ahmed & Nessma photo'}
               width={800}
               height={1280}
             />
@@ -74,35 +62,9 @@ function Home() {
             }}
           />
         </div>
-        <div className='text-center'>
-          <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-            Scan your E-vite
-          </h1>
-          <p className='mt-6 text-lg leading-8 text-gray-600'>
-            {' '}
-            We're so grateful to be surrounded by so much love. please scan the
-            QR Code to get more information about the Wedding and Henna
-          </p>
-          <div className='mt-10 flex items-center justify-center gap-x-6'>
-            <Canvas
-              text={'https://bit.ly/m/Ahmed-Nessma'}
-              options={{
-                errorCorrectionLevel: 'M',
-                margin: 3,
-                scale: 4,
-                width: 200,
-                color: {
-                  dark: '#010599FF',
-                  light: '#FFBF60FF',
-                },
-              }}
-            />
-          </div>
-        </div>
       </div>
+      <LoginForm />
       <Footer />
     </div>
   )
 }
-
-export default Home
