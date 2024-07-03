@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Share Your Memories', href: 'share-your-memories' },
+  { name: 'Share Your Memories', href: '/share-your-memories' },
 ]
 export const Hero = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -18,7 +18,7 @@ export const Hero = () => {
         aria-label='Global'
       >
         <div className='flex lg:flex-1'>
-          <Link href='#' className='-m-1.5 p-1.5'>
+          <Link href='/' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Ahmed & Nessma Wedding</span>
             <Image
               width={75}
