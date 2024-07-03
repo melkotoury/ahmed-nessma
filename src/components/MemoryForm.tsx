@@ -1,15 +1,38 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 import {
   Card,
   Input,
   Button,
   Typography,
   Textarea,
+  Alert,
 } from '@material-tailwind/react'
 
-export function MemoryForm() {
-  // IMPORTANT: passing an initializer function to prevent Uppy from being reinstantiated on every render.
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
+type Inputs = {
+  name: string
+  message: string
+  files?: File[] | null
+}
+
+const schema = yup.object({
+  name: yup.string().required(),
+  message: yup.string().required(),
+  files: yup.array().nullable(),
+})
+
+export function MemoryForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  })
+  const onSubmit = (data: Inputs) => console.log(data)
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
       <Card
@@ -38,7 +61,10 @@ export function MemoryForm() {
         >
           We are happy to see you sharing a memory with us
         </Typography>
-        <form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>
+        <form
+          className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className='mb-1 flex flex-col gap-6'>
             <Typography
               variant='h6'
@@ -51,6 +77,9 @@ export function MemoryForm() {
               Your Name
             </Typography>
             <Input
+              {...register('name', {
+                required: true,
+              })}
               size='lg'
               color='purple'
               placeholder='John Doe'
@@ -73,6 +102,7 @@ export function MemoryForm() {
               Your Message
             </Typography>
             <Textarea
+              {...register('message', { required: true })}
               size='lg'
               color='purple'
               placeholder='Enter your message here'
@@ -96,12 +126,31 @@ export function MemoryForm() {
             </Typography>
 
             <input
+              {...register('files')}
               className='relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary'
               type='file'
               id='formFileMultiple'
               multiple
             />
+            <div className='flex w-full flex-col gap-2'>
+              {errors.name?.message && (
+                <Alert className='bg-red-800 text-white font-sm p-2'>
+                  {errors.name?.message}
+                </Alert>
+              )}
+              {errors.message?.message && (
+                <Alert className='bg-red-800 text-white font-sm p-2'>
+                  {errors.message?.message}
+                </Alert>
+              )}
+              {errors.files?.message && (
+                <Alert className='bg-red-800 text-white font-sm p-2'>
+                  {errors.files?.message}
+                </Alert>
+              )}
+            </div>
             <Button
+              type='submit'
               className='mt-6 p-6 bg-purple-700 text-white'
               fullWidth
               placeholder={undefined}
