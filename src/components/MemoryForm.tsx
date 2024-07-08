@@ -1,22 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
-import {
-  Card,
-  Input,
-  Button,
-  Typography,
-  Textarea,
-} from '@material-tailwind/react'
+import { Card, Typography } from '@material-tailwind/react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-
-type Inputs = {
-  name: string
-  message: string
-  // files?: File[] | null
-}
 
 const schema = yup
   .object({
@@ -26,23 +14,20 @@ const schema = yup
   .required()
 
 export function MemoryForm() {
+  const [success, setSuccess] = useState(false)
+
+  useEffect(() => {
+    if (window.location.search.includes('success=true')) {
+      setSuccess(true)
+    }
+  }, [])
   const {
     register,
     formState: { errors },
-    handleSubmit,
   } = useForm({
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data: Inputs) => {
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString(),
-    })
-      .then(() => alert('Form Submitted Successfully!'))
-      .catch((error) => alert(error))
-  }
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
       <Card
@@ -71,68 +56,37 @@ export function MemoryForm() {
         >
           We are happy to see you sharing a memory with us
         </Typography>
-
+        {success && (
+          <p style={{ color: 'green' }}>Successfully submitted form!</p>
+        )}
         <form
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
-          onSubmit={handleSubmit(onSubmit)}
           method='POST'
+          name='memory'
+          action='/?success=true'
           data-netlify='true'
-          name='ShareYourMemory'
         >
-          <input type='hidden' name='form-name' value='ShareYourMemory' />
+          <input type='hidden' name='form-name' value='memory' />
           <div className='mb-1 flex flex-col gap-6'>
-            <Typography
-              variant='h6'
-              color='blue-gray'
-              className='-mb-3'
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
-              Your Name
-            </Typography>
-            <Input
+            <label htmlFor='name'>Your Name:</label>
+
+            <input
               {...register('name')}
               name='name'
               id='name'
-              size='lg'
               color='purple'
               placeholder='John Doe'
               className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
-              labelProps={{
-                className: 'before:content-none after:content-none',
-              }}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-              crossOrigin={undefined}
             />
             <p className='text-xs text-red-800'>{errors.name?.message}</p>
 
-            <Typography
-              variant='h6'
-              color='blue-gray'
-              className='-mb-3'
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
-              Your Message
-            </Typography>
-            <Textarea
-              {...register('message')}
-              name='message'
+            <label htmlFor='message'>Your Message:</label>
+            <textarea
               id='message'
-              size='lg'
-              color='purple'
-              placeholder='Enter your message here'
-              className=' text-black p-4'
-              labelProps={{
-                className: 'before:content-none after:content-none',
-              }}
               rows={8}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            />
+              className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
+              {...register('message')}
+            ></textarea>
             <p className='text-xs text-red-800'>{errors.message?.message}</p>
 
             {/*<Typography*/}
@@ -154,16 +108,9 @@ export function MemoryForm() {
             {/*  multiple*/}
             {/*/>*/}
 
-            <Button
-              type='submit'
-              className='mt-6 p-6 bg-purple-700 text-white'
-              fullWidth
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
+            <button type='submit' className='mt-6 p-6 bg-purple-700 text-white'>
               Share a Memory
-            </Button>
+            </button>
           </div>
         </form>
       </Card>
