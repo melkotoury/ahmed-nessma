@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useRouter } from 'next/router'
+
 import { useForm } from 'react-hook-form'
 import {
   Card,
@@ -11,11 +13,11 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-// type Inputs = {
-//   name: string
-//   message: string
-//   // files?: File[] | null
-// }
+type Inputs = {
+  name: string
+  message: string
+  // files?: File[] | null
+}
 
 const schema = yup
   .object({
@@ -25,35 +27,25 @@ const schema = yup
   .required()
 
 export function MemoryForm() {
+  const router = useRouter()
+
   const {
     register,
     formState: { errors },
-    // handleSubmit,
+    handleSubmit,
   } = useForm({
     resolver: yupResolver(schema),
   })
-  const [success, setSuccess] = useState(false)
 
-  useEffect(() => {
-    if (window.location.search.includes('success=true')) {
-      setSuccess(true)
-    }
-  }, [])
-  // const onSubmit = (data: Inputs) => {
-  //   const formData = new URLSearchParams()
-  //   formData.append('form-name', 'ShareYourMemory') // Replace with your actual form name
-  //
-  //   // Append other form fields
-  //   formData.append('name', data.name)
-  //   formData.append('message', data.message)
-  //   fetch('/', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  //     body: formData.toString(),
-  //   })
-  //     .then(() => alert('Success!'))
-  //     .catch((error) => alert(error))
-  // }
+  const onSubmit = (data: Inputs) => {
+    fetch('/share-your-memories', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString(),
+    })
+      .then(() => router.push('/thank-you/'))
+      .catch((error) => alert(error))
+  }
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
       <Card
@@ -83,18 +75,14 @@ export function MemoryForm() {
           We are happy to see you sharing a memory with us
         </Typography>
 
-        {success && (
-          <p style={{ color: 'green' }}>Successfully submitted form!</p>
-        )}
         <form
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
-          // onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           method='POST'
-          action='/?success=true'
           data-netlify='true'
           name='ShareYourMemory'
         >
-          <input name='form-name' value='ShareYourMemory' type='hidden' />
+          <input type='hidden' name='form-name' value='ShareYourMemory' />
           <div className='mb-1 flex flex-col gap-6'>
             <Typography
               variant='h6'
