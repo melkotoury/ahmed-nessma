@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import { useForm } from 'react-hook-form'
 import {
@@ -27,8 +26,6 @@ const schema = yup
   .required()
 
 export function MemoryForm() {
-  const router = useRouter()
-
   const {
     register,
     formState: { errors },
@@ -43,7 +40,7 @@ export function MemoryForm() {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(data).toString(),
     })
-      .then(() => router.push('/success'))
+      .then(() => alert('Form Submitted Successfully!'))
       .catch((error) => alert(error))
   }
   return (
