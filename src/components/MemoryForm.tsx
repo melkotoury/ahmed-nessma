@@ -22,7 +22,7 @@ export function MemoryForm() {
       setError(null)
       const form = event.target as HTMLFormElement
       const formData = new FormData(form)
-      const res = await fetch('/share-your-memories', {
+      const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(Object.entries(formData)),
