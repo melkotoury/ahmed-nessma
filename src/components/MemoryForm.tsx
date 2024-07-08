@@ -1,17 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useForm } from 'react-hook-form'
 import { Card, Typography } from '@material-tailwind/react'
-
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-
-const schema = yup
-  .object({
-    name: yup.string().required(),
-    message: yup.string().required(),
-  })
-  .required()
 
 export function MemoryForm() {
   const [success, setSuccess] = useState(false)
@@ -21,12 +10,6 @@ export function MemoryForm() {
       setSuccess(true)
     }
   }, [])
-  const {
-    register,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  })
 
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
@@ -71,23 +54,20 @@ export function MemoryForm() {
             <label htmlFor='name'>Your Name:</label>
 
             <input
-              {...register('name')}
               name='name'
               id='name'
               color='purple'
               placeholder='John Doe'
               className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
             />
-            <p className='text-xs text-red-800'>{errors.name?.message}</p>
 
             <label htmlFor='message'>Your Message:</label>
             <textarea
               id='message'
+              name='message'
               rows={8}
               className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
-              {...register('message')}
             ></textarea>
-            <p className='text-xs text-red-800'>{errors.message?.message}</p>
 
             {/*<Typography*/}
             {/*  variant='h6'*/}
