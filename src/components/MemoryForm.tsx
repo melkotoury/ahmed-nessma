@@ -11,7 +11,7 @@ export function MemoryForm() {
     try {
       setStatus('pending')
       setError(null)
-      const form = event.target
+      const form = event.target as HTMLFormElement
       const formData = new FormData(form)
       const res = await fetch('/share-your-memories', {
         method: 'POST',
