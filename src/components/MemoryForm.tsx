@@ -32,11 +32,8 @@ export function MemoryForm() {
         </Typography>
         <form
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
-          name='Memories'
-          method='POST'
           data-netlify='true'
         >
-          <input type='hidden' name='form-name' value='Memories' />
           <div className='mb-1 flex flex-col gap-6'>
             <label htmlFor='name'>Name</label>
             <input
