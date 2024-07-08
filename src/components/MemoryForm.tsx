@@ -16,7 +16,7 @@ export function MemoryForm() {
       const res = await fetch('/share-your-memories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString(),
+        body: new URLSearchParams(formData),
       })
       if (res.ok) {
         setStatus('ok')
