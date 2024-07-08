@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   Card,
@@ -32,6 +32,13 @@ export function MemoryForm() {
   } = useForm({
     resolver: yupResolver(schema),
   })
+  const [success, setSuccess] = useState(false)
+
+  useEffect(() => {
+    if (window.location.search.includes('success=true')) {
+      setSuccess(true)
+    }
+  }, [])
   // const onSubmit = (data: Inputs) => {
   //   const formData = new URLSearchParams()
   //   formData.append('form-name', 'ShareYourMemory') // Replace with your actual form name
@@ -75,13 +82,17 @@ export function MemoryForm() {
         >
           We are happy to see you sharing a memory with us
         </Typography>
+
+        {success && (
+          <p style={{ color: 'green' }}>Successfully submitted form!</p>
+        )}
         <form
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
           // onSubmit={handleSubmit(onSubmit)}
-          action='/sucess'
-          name='ShareYourMemory'
           method='POST'
-          data-netlify={true}
+          action='/?success=true'
+          data-netlify='true'
+          name='ShareYourMemory'
         >
           <input name='form-name' value='ShareYourMemory' type='hidden' />
           <div className='mb-1 flex flex-col gap-6'>
@@ -98,6 +109,7 @@ export function MemoryForm() {
             <Input
               {...register('name')}
               name='name'
+              id='name'
               size='lg'
               color='purple'
               placeholder='John Doe'
@@ -124,6 +136,7 @@ export function MemoryForm() {
             <Textarea
               {...register('message')}
               name='message'
+              id='message'
               size='lg'
               color='purple'
               placeholder='Enter your message here'
