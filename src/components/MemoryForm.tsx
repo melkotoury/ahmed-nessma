@@ -11,11 +11,11 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-type Inputs = {
-  name: string
-  message: string
-  // files?: File[] | null
-}
+// type Inputs = {
+//   name: string
+//   message: string
+//   // files?: File[] | null
+// }
 
 const schema = yup
   .object({
@@ -32,21 +32,21 @@ export function MemoryForm() {
   } = useForm({
     resolver: yupResolver(schema),
   })
-  const onSubmit = (data: Inputs) => {
-    const formData = new URLSearchParams()
-    formData.append('form-name', 'ShareYourMemory') // Replace with your actual form name
-
-    // Append other form fields
-    formData.append('name', data.name)
-    formData.append('message', data.message)
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData.toString(),
-    })
-      .then(() => alert('Success!'))
-      .catch((error) => alert(error))
-  }
+  // const onSubmit = (data: Inputs) => {
+  //   const formData = new URLSearchParams()
+  //   formData.append('form-name', 'ShareYourMemory') // Replace with your actual form name
+  //
+  //   // Append other form fields
+  //   formData.append('name', data.name)
+  //   formData.append('message', data.message)
+  //   fetch('/', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  //     body: formData.toString(),
+  //   })
+  //     .then(() => alert('Success!'))
+  //     .catch((error) => alert(error))
+  // }
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
       <Card
@@ -77,9 +77,10 @@ export function MemoryForm() {
         </Typography>
         <form
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
-          onSubmit={handleSubmit(onSubmit)}
+          // onSubmit={handleSubmit(onSubmit)}
+          action='/sucess'
           name='ShareYourMemory'
-          method='post'
+          method='POST'
           data-netlify={true}
         >
           <input name='form-name' value='ShareYourMemory' type='hidden' />
