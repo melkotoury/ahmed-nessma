@@ -43,7 +43,7 @@ export function MemoryForm() {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(data).toString(),
     })
-      .then(() => router.push('/thank-you/'))
+      .then(() => router.push('/success'))
       .catch((error) => alert(error))
   }
   return (
