@@ -12,11 +12,11 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-type Inputs = {
-  name: string
-  message: string
-  files?: File[] | null
-}
+// type Inputs = {
+//   name: string
+//   message: string
+//   files?: File[] | null
+// }
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -26,12 +26,12 @@ const schema = yup.object({
 export function MemoryForm() {
   const {
     register,
-    handleSubmit,
+    // handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   })
-  const onSubmit = (data: Inputs) => console.log(data)
+  // const onSubmit = (data: Inputs) => console.log(data)
 
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
@@ -63,7 +63,7 @@ export function MemoryForm() {
         </Typography>
         <form
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
-          onSubmit={handleSubmit(onSubmit)}
+          // onSubmit={handleSubmit(onSubmit)}
           name='Share your memory'
           method='post'
           data-netlify={true}
