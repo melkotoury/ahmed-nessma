@@ -1,12 +1,5 @@
 import React from 'react'
-// import { useForm } from 'react-hook-form'
-import {
-  Card,
-  Input,
-  Button,
-  Typography,
-  Textarea,
-} from '@material-tailwind/react'
+import { Card, Typography } from '@material-tailwind/react'
 
 export function MemoryForm() {
   return (
@@ -45,63 +38,25 @@ export function MemoryForm() {
         >
           <input type='hidden' name='form-name' value='Memories' />
           <div className='mb-1 flex flex-col gap-6'>
-            <Typography
-              variant='h6'
-              color='blue-gray'
-              className='-mb-3'
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
-              Your Name
-            </Typography>
-            <Input
+            <label htmlFor='name'>Name</label>
+            <input
+              type='text'
               name='name'
               id='name'
-              size='lg'
               color='purple'
               placeholder='John Doe'
               className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
-              labelProps={{
-                className: 'before:content-none after:content-none',
-              }}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-              crossOrigin={undefined}
             />
-            <Typography
-              variant='h6'
-              color='blue-gray'
-              className='-mb-3'
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
-              Your Message
-            </Typography>
-            <Textarea
+            <label htmlFor='message'>Your Message</label>
+
+            <textarea
               name='message'
-              size='lg'
-              color='purple'
+              id='message'
               placeholder='Enter your message here'
               className=' text-black p-4'
-              labelProps={{
-                className: 'before:content-none after:content-none',
-              }}
               rows={8}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
             />
-            <Typography
-              variant='h6'
-              color='blue-gray'
-              className='-mb-3'
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
-              Upload file
-            </Typography>
+            <label htmlFor='files'>Upload your files</label>
 
             <input
               name='files'
@@ -111,16 +66,9 @@ export function MemoryForm() {
               multiple
             />
 
-            <Button
-              type='submit'
-              className='mt-6 p-6 bg-purple-700 text-white'
-              fullWidth
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            >
+            <button type='submit' className='mt-6 p-6 bg-purple-700 text-white'>
               Share a Memory
-            </Button>
+            </button>
           </div>
         </form>
       </Card>
