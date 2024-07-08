@@ -1,16 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Card, Typography } from '@material-tailwind/react'
 
 export function MemoryForm() {
-  const [success, setSuccess] = useState(false)
+  const [status, setStatus] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (window.location.search.includes('success=true')) {
-      setSuccess(true)
+  const handleFormSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      setStatus('pending')
+      setError(null)
+      const form = event.target
+      const formData = new FormData(form)
+      const res = await fetch('/share-your-memories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString(),
+      })
+      if (res.ok) {
+        setStatus('ok')
+        form.reset() // Clear the form inputs
+      } else {
+        throw new Error(`Error: ${res.status} ${res.statusText}`)
+      }
+    } catch (e) {
+      setStatus('error')
+      setError(e.message)
     }
-  }, [])
-
+  }
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
       <Card
@@ -39,14 +57,12 @@ export function MemoryForm() {
         >
           We are happy to see you sharing a memory with us
         </Typography>
-        {success && (
-          <p style={{ color: 'green' }}>Successfully submitted form!</p>
-        )}
+
         <form
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
           method='POST'
           name='memory'
-          action='/share-your-memories?success=true'
+          onSubmit={handleFormSubmit}
           data-netlify='true'
         >
           <input type='hidden' name='form-name' value='memory' />
@@ -89,8 +105,17 @@ export function MemoryForm() {
             {/*/>*/}
 
             <button type='submit' className='mt-6 p-6 bg-purple-700 text-white'>
-              Share a Memory
+              {status === 'ok'
+                ? 'Message sent'
+                : status === 'pending'
+                  ? 'Sending...'
+                  : 'Share a memmory'}
             </button>
+            {status === 'error' && (
+              <div className='text-center text-red-800 text-xl'>
+                Error: {error}
+              </div>
+            )}
           </div>
         </form>
       </Card>
