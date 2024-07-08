@@ -33,6 +33,7 @@ export function MemoryForm() {
     resolver: yupResolver(schema),
   })
   const onSubmit = (data: Inputs) => console.log(data)
+
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
       <Card
@@ -64,7 +65,11 @@ export function MemoryForm() {
         <form
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
           onSubmit={handleSubmit(onSubmit)}
+          name='Share your memory'
+          method='post'
+          data-netlify={true}
         >
+          <input name='form-name' value='Share your memory' type='hidden' />
           <div className='mb-1 flex flex-col gap-6'>
             <Typography
               variant='h6'
