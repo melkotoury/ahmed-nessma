@@ -63,7 +63,7 @@ export function MemoryForm() {
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
           method='POST'
           name='memory'
-          action='/?success=true'
+          action='/share-your-memories?success=true'
           data-netlify='true'
         >
           <input type='hidden' name='form-name' value='memory' />
