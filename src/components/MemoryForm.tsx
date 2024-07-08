@@ -74,6 +74,7 @@ export function MemoryForm() {
               id='name'
               color='purple'
               placeholder='John Doe'
+              required
               className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
             />
 
@@ -81,6 +82,7 @@ export function MemoryForm() {
             <textarea
               id='message'
               name='message'
+              required
               rows={8}
               className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
             ></textarea>
@@ -104,7 +106,11 @@ export function MemoryForm() {
             {/*  multiple*/}
             {/*/>*/}
 
-            <button type='submit' className='mt-6 p-6 bg-purple-700 text-white'>
+            <button
+              type='submit'
+              disabled={status === 'pending' || status === 'ok'}
+              className='mt-6 p-6 bg-purple-700 text-white'
+            >
               {status === 'ok'
                 ? 'Message sent'
                 : status === 'pending'
