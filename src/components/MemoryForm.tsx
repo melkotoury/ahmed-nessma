@@ -5,6 +5,15 @@ import { Card, Typography } from '@material-tailwind/react'
 export function MemoryForm() {
   const [status, setStatus] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const buttonText = () => {
+    if (status === 'ok') {
+      return 'Message sent'
+    } else if (status === 'pending') {
+      return 'Sending...'
+    } else {
+      return 'Share a memory'
+    }
+  }
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -25,8 +34,14 @@ export function MemoryForm() {
         throw new Error(`Error: ${res.status} ${res.statusText}`)
       }
     } catch (e) {
-      setStatus('error')
-      setError(e.message)
+      if (e instanceof Error) {
+        // Narrow down the type to Error
+        setStatus('error')
+        setError(e.message)
+      } else {
+        // Handle other cases (optional)
+        console.error('Unexpected error:', e)
+      }
     }
   }
   return (
@@ -111,12 +126,9 @@ export function MemoryForm() {
               disabled={status === 'pending' || status === 'ok'}
               className='mt-6 p-6 bg-purple-700 text-white'
             >
-              {status === 'ok'
-                ? 'Message sent'
-                : status === 'pending'
-                  ? 'Sending...'
-                  : 'Share a memmory'}
+              {buttonText()}
             </button>
+
             {status === 'error' && (
               <div className='text-center text-red-800 text-xl'>
                 Error: {error}
