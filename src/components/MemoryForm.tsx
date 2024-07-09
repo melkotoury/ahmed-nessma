@@ -29,7 +29,7 @@ export function MemoryForm() {
       if (file) {
         formData.set('file', file)
       }
-      const res = await fetch('/api/upload', {
+      const res = await fetch('/', {
         method: 'POST',
         body: formData,
       })
@@ -93,10 +93,9 @@ export function MemoryForm() {
             <input
               name='name'
               id='name'
-              color='purple'
               placeholder='John Doe'
               required
-              className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
+              className='!border-purple focus:!border-purple-950 text-black p-4'
             />
 
             <label htmlFor='message'>Your Message:</label>
@@ -105,7 +104,7 @@ export function MemoryForm() {
               name='message'
               required
               rows={8}
-              className='!border-purple focus:!border-purple-950 text-purple-950 p-4'
+              className='!border-purple focus:!border-purple-950 text-black p-4'
             ></textarea>
 
             <label htmlFor='name'>Upload File:</label>
