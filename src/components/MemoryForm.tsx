@@ -4,11 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { Card, Typography } from '@material-tailwind/react'
 
-interface Inputs {
-  name: string
-  message: string
-  file?: File
-}
 const schema = yup
   .object({
     name: yup.string().required(),
@@ -18,21 +13,10 @@ const schema = yup
 export function MemoryForm() {
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   })
-
-  const onSubmit = async (data: Inputs) => {
-    try {
-      // Handle form submission (e.g., send data to Netlify)
-      // You don't need to manually submit the form; Netlify will handle it.
-      console.log('Form data:', data)
-    } catch (error) {
-      console.error('Error submitting form:', error)
-    }
-  }
 
   return (
     <div className='mt-10 flex items-center justify-center gap-x-6'>
@@ -67,39 +51,41 @@ export function MemoryForm() {
           className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'
           method='POST'
           name='memories'
-          onSubmit={handleSubmit(onSubmit)}
           data-netlify='true'
         >
           <input type='hidden' name='form-name' value='memories' />
           <div className='mb-1 flex flex-col gap-6'>
-            <label htmlFor='name'>Your Name:</label>
-
-            <input
-              {...register('name')}
-              name='name'
-              placeholder='John Doe'
-              className='!border-purple focus:!border-purple-950 text-black p-4'
-            />
+            <label htmlFor='name'>
+              Your Name:
+              <input
+                {...register('name')}
+                name='name'
+                placeholder='John Doe'
+                className='!border-purple focus:!border-purple-950 text-black p-4'
+              />
+            </label>
             <p className='text-red-800 text-xs'>{errors.name?.message}</p>
 
-            <label htmlFor='message'>Your Message:</label>
-            <textarea
-              {...register('message')}
-              name='message'
-              rows={8}
-              className='!border-purple focus:!border-purple-950 text-black p-4'
-            ></textarea>
+            <label htmlFor='message'>
+              Your Message:
+              <textarea
+                {...register('message')}
+                name='message'
+                rows={8}
+                className='!border-purple focus:!border-purple-950 text-black p-4'
+              ></textarea>
+            </label>
             <p className='text-red-800 text-xs'>{errors.message?.message}</p>
 
-            <label htmlFor='name'>Upload File:</label>
-
-            <input
-              name='file'
-              className='relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary'
-              type='file'
-              id='file'
-            />
-
+            <label htmlFor='file'>
+              Upload File:
+              <input
+                name='file'
+                className='relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary'
+                type='file'
+                id='file'
+              />
+            </label>
             <button type='submit' className='mt-6 p-6 bg-purple-700 text-white'>
               Share a memory
             </button>
